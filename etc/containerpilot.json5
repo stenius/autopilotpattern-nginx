@@ -55,7 +55,7 @@
       port: 443,
       interfaces: ["eth1", "eth0"],
       health: {
-        exec: "/usr/bin/curl --insecure --fail --silent --show-error --output /dev/null --header \"HOST: {{ .ACME_DOMAIN }}\" https://localhost/nginx-health",
+        exec: "health-check https_local",
         interval: 10,
         ttl: 25
       }
@@ -81,7 +81,7 @@
     {
       name: "acme-checkin",
       exec: [ "acme", "checkin" ],
-      timeout: "30s",
+      timeout: "90s",
       when: {
         interval: "1h",
       }

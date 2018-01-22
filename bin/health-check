@@ -12,6 +12,8 @@ if [[ $SCHEME == "https" ]]; then
     else
         curl -fsSo /dev/null "https://${ACME_DOMAIN}/nginx-health"
     fi
+elif [[ $SCHEME == "https_local" ]]; then
+   curl --insecure --fail --silent --show-error --output /dev/null --header "HOST: ${ACME_DOMAIN}" https://localhost/nginx-health
 else
     curl -fsSo /dev/null "http://localhost/nginx-health"
 fi
