@@ -30,6 +30,14 @@
         ttl: 25,
       }
     },
+    {
+      name: "route53-dns",
+      exec: "update-dns.py",
+      when: {
+        source: "nginx-public",
+        each: "changed"
+      }
+    },
     {{ if .ACME_DOMAIN }}{
       name: "nginx-ssl",
       port: 443,
@@ -81,7 +89,7 @@
     {
       name: "acme-checkin",
       exec: [ "acme", "checkin" ],
-      timeout: "90s",
+      timeout: "180s",
       when: {
         interval: "1h",
       }

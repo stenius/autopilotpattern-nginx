@@ -8,7 +8,12 @@ RUN apt-get update \
         ca-certificates \
         curl \
         unzip \
+        python-pip \
     && rm -rf /var/lib/apt/lists/*
+
+# Install Python dependenceies
+COPY requirements.txt requirements.txt
+RUN pip install -r requirements.txt
 
 # Install Consul
 # Releases at https://releases.hashicorp.com/consul
